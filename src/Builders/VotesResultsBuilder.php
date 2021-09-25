@@ -4,9 +4,9 @@ namespace src\Builders;
 
 use Spatie\DataTransferObject\DataTransferObjectError;
 use src\Exceptions\ApiBuilderException;
-use src\Models\Category;
+use src\Models\Vote;
 
-class CategoriesResultsBuilder
+class VotesResultsBuilder
 {
     private ?array $response;
 
@@ -23,7 +23,7 @@ class CategoriesResultsBuilder
 
         try {
             foreach ($this->response as $obj) {
-                $result[] = new Category($obj);
+                $result[] = new Vote($obj);
             }
         } catch (DataTransferObjectError $e) {
             throw new ApiBuilderException('Wrong Api Response');

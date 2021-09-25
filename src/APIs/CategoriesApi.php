@@ -16,15 +16,14 @@ class CategoriesApi
 
     public function search(int $limit = 5, int $page = 0)
     {
-        $uri = sprintf( //https://api.thecatapi.com/v1/categories
+        $uri = sprintf( // https://api.thecatapi.com/v1/categories
             'https://api.thecatapi.com/v1/categories?limit=%d&page=%d',
             $limit,
             $page
         );
 
-        $result = $this->client->get($uri);
-        return $result;
+        // return $this->client->get($uri);
 
-        // return (new CategoriesResultsBuilder($this->client->get($uri)))->build();
+        return (new CategoriesResultsBuilder($this->client->get($uri)))->build();
     }
 }

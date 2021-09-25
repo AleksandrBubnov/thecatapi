@@ -6,6 +6,6 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class Category extends DataTransferObject
 {
-    public string $id;
+    public int $id;
     public string $name;
 }

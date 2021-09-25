@@ -13,7 +13,8 @@ class GuzzleAdapter implements HttpClientInterface
 
     public function __construct()
     {
-        $this->client = new Client();
+        $this->client = new Client(['headers' => ['x-api-key' => 'f6cbf48d-2211-437b-a030-9fd8e0428db6']]);
+        // $this->client = new Client();
     }
 
     /**

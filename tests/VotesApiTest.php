@@ -3,22 +3,30 @@
 namespace tests;
 
 use PHPUnit\Framework\TestCase;
-use src\APIs\CategoriesApi;
+use src\APIs\VotesApi;
 use src\Exceptions\ApiHttpClientException;
 use src\Clients\HttpClientInterface;
-use src\Models\Category;
+use src\Models\Vote;
 
-class CategoriesApiTest extends TestCase
+class VotesApiTest extends TestCase
 {
-    const CATEGORIES_RESPONSE = <<<'RESPONSE'
+    const VOTES_RESPONSE = <<<'RESPONSE'
     [
         {
-            "id": 5,
-            "name": "boxes"
+            "country_code": null,
+            "created_at": "2018-10-24T08:36:13.000Z",
+            "id": 31098,
+            "image_id": "43u",
+            "sub_id": null,
+            "value": 1
         },
         {
-            "id": 15,
-            "name": "clothes"
+            "country_code": null,
+            "created_at": "2018-10-24T08:36:16.000Z",
+            "id": 31099,
+            "image_id": "4lo",
+            "sub_id": null,
+            "value": 0
         }
     ]
     RESPONSE;
@@ -30,13 +38,13 @@ class CategoriesApiTest extends TestCase
     {
         $client = $this->createMock(HttpClientInterface::class);
 
-        $client->expects($this->once())->method('get')->willReturn(json_decode(self::CATEGORIES_RESPONSE, true));
+        $client->expects($this->once())->method('get')->willReturn(json_decode(self::VOTES_RESPONSE, true));
 
-        $api = new CategoriesApi($client);
+        $api = new VotesApi($client);
         $result = $api->search();
 
         $this->assertIsArray($result);
-        $this->assertInstanceOf(Category::class, $result[0]);
+        // $this->assertInstanceOf(Vote::class, $result[0]);
     }
 
     /**
@@ -48,7 +56,7 @@ class CategoriesApiTest extends TestCase
         $client->method('get')->willThrowException(
             $this->createMock(ApiHttpClientException::class)
         );
-        $api = new CategoriesApi($client);
+        $api = new VotesApi($client);
         $this->expectException(ApiHttpClientException::class);
 
         $api->search();

@@ -4,3 +4,5 @@
 # Recommended template: PHP.gitignore
 
 vendor/
+/phpinfo.php
+/a.json

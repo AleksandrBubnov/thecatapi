@@ -1,8 +1,6 @@
 <?php
 
-use GuzzleHttp\Client;
 use src\Clients\GuzzleAdapter;
-use src\ApiFacade;
 use src\Decorator\MiddleDecorator;
 
 require_once './vendor/autoload.php';
@@ -13,8 +11,10 @@ require_once './vendor/autoload.php';
 
 // $facade = new \src\ApiFacade(new GuzzleAdapter());
 
-$facade = new \src\ApiFacade(new MiddleDecorator(new GuzzleAdapter));
+$facade = new \src\ApiFacade(new MiddleDecorator(new GuzzleAdapter()));
 
-print_r($facade->images()->search(10, 0));
+print_r(($facade->images())->search(5, 0));
 echo '<br/><br/>';
-print_r($facade->categories()->search(10, 0));
+print_r(($facade->categories())->search(5, 0));
+echo '<br/><br/>';
+print_r(($facade->favourites())->search(3, 0));

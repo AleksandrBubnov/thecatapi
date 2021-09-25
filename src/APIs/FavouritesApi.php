@@ -2,10 +2,10 @@
 
 namespace src\APIs;
 
-use src\Builders\VotesResultsBuilder;
+use src\Builders\FavouritesResultsBuilder;
 use src\Clients\HttpClientInterface;
 
-class VotesApi
+class FavouritesApi
 {
     private HttpClientInterface $client;
 
@@ -16,14 +16,14 @@ class VotesApi
 
     public function search(int $limit = 5, int $page = 0)
     {
-        $uri = sprintf( // https://api.thecatapi.com/v1/votes
-            'https://api.thecatapi.com/v1/votes?limit=%d&page=%d',
+        $uri = sprintf( // https://api.thecatapi.com/v1/favourites
+            'https://api.thecatapi.com/v1/favourites?limit=%d&page=%d',
             $limit,
             $page
         );
 
-        return $this->client->get($uri);
+        // return $this->client->get($uri);
 
-        // return (new VotesResultsBuilder($this->client->get($uri)))->build();
+        return (new FavouritesResultsBuilder($this->client->get($uri)))->build();
     }
 }

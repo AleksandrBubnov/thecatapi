@@ -8,10 +8,10 @@ use src\APIs\ImagesApi;
 // use GuzzleHttp\Exception\GuzzleException;
 use src\Exceptions\ApiHttpClientException;
 use src\Clients\HttpClientInterface;
+use src\Models\Image;
 
 class ImagesApiTest extends TestCase
 {
-
     const IMAGES_RESPONSE = <<<'RESPONSE'
     [
         {
@@ -44,12 +44,13 @@ class ImagesApiTest extends TestCase
     {
         $client = $this->createMock(HttpClientInterface::class);
 
-        $client->expects($this->once())->method('get')->willReturn(json_decode(self::IMAGES_RESPONSE));
+        $client->expects($this->once())->method('get')->willReturn(json_decode(self::IMAGES_RESPONSE, true));
 
         $api = new ImagesApi($client);
         $result = $api->search();
 
         $this->assertIsArray($result);
+        $this->assertInstanceOf(Image::class, $result[0]);
     }
 
     /**

@@ -22,7 +22,7 @@ class ImagesApi
 
     public function search(int $limit = 5, int $page = 0, string $order = "DESC")
     {
-        $uri = sprintf( //https://api.thecatapi.com/v1/images/search
+        $uri = sprintf( // https://api.thecatapi.com/v1/images/search
             'https://api.thecatapi.com/v1/images/search?limit=%d&page=%d&order=%s',
             $limit,
             $page,
@@ -31,10 +31,9 @@ class ImagesApi
 
         // проверка кеша
         // логирование апи клиента
-        $result = $this->client->get($uri);
+        // return $this->client->get($uri);
 
         // унификация ответа
-        return $result;
-        // return (new ImagesResultsBuilder($this->client->get($uri)))->build();
+        return (new ImagesResultsBuilder($this->client->get($uri)))->build();
     }
 }
